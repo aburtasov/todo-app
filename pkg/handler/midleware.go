@@ -26,11 +26,21 @@ func (h *Handler) userIdentity(c *gin.Context) {
 		return
 	}
 
+	if headerParts[0] != "Bearer" {
+		NewErrorResponce(c, http.StatusUnauthorized, "invalid auth header")
+		return
+	}
+
+	if headerParts[1] == "" {
+		NewErrorResponce(c, http.StatusUnauthorized, "no token in header")
+		return
+	}
+
 	// parse token
 
 	userId, err := h.services.Autorization.ParseToken(headerParts[1])
 	if err != nil {
-		NewErrorResponce(c, http.StatusUnauthorized, err.Error())
+		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
