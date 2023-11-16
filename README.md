@@ -1,12 +1,12 @@
-# todo-app
+## todo-app
 Todo-app service
 
-# Для запуска приложения:
+### For run application:
 ```
 make build && make run
 
 ```
-Если приложение запускается впервые, необходимо применить миграции к базе данных:
+If application run first time, you have to apply migration in database:
 ```
 make migrate
 
